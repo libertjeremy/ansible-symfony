@@ -1,4 +1,5 @@
 ---
+
 - name: Reload all symfony
   vars:
     ansible_become: false
