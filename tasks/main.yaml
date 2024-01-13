@@ -6,6 +6,6 @@
     - name: Retrieve compiled env file content
       ansible.builtin.command: 'cat {{ symfony_folder }}/.env.local.php'
       register: compiled_dotenv_content
-    - name: Display complied env file content
+    - name: Display compiled env file content
       ansible.builtin.debug:
         var: compiled_dotenv_content.stdout
