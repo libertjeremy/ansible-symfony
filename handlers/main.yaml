@@ -48,3 +48,7 @@
   ansible.builtin.command:
     cmd: '{{ symfony_binary_path }} console doctrine:migrations:migrate --env={{ symfony_app_env }} --no-interaction'
     chdir: '{{ symfony_folder }}'
+- name: Reload Symfony PHP OpCache
+  ansible.builtin.command:
+    cmd: '{{ symfony_binary_path }} php -r "opcache_reset();"'
+    chdir: '{{ symfony_folder }}'
