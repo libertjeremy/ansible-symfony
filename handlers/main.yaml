@@ -1,40 +1,38 @@
 ---
 
-- name: Reload all symfony
-  block:
-    - name: Remove compiled env file
-      tags: dotenv-remove
-      ansible.builtin.file:
-        path: '{{ symfony_folder }}/.env.local.php'
-        state: absent
-    - name: Clear Symfony cache
-      tags: clear-cache
-      ansible.builtin.file:
-        path: '{{ symfony_folder }}/var/cache/{{ symfony_app_env }}'
-        state: absent
-      no_log: true
-      ignore_errors: true
-    - name: Regenerate compiled env file
-      become: false
-      tags: dotenv-dump
-      ansible.builtin.command:
-        cmd: '{{ symfony_binary_path }} console dotenv:dump {{ symfony_app_env }} --env={{ symfony_app_env }}'
-        chdir: '{{ symfony_folder }}'
-    - name: Clear Doctrine metadata cache
-      become: false
-      tags: doctrine-cache-clear-metadata
-      ansible.builtin.command:
-        cmd: '{{ symfony_binary_path }} console doctrine:cache:clear-metadata --env={{ symfony_app_env }} --no-interaction'
-        chdir: '{{ symfony_folder }}'
-    - name: Clear Doctrine query cache
-      become: false
-      tags: doctrine-cache-clear-query
-      ansible.builtin.command:
-        cmd: '{{ symfony_binary_path }} console doctrine:cache:clear-query --env={{ symfony_app_env }} --no-interaction'
-        chdir: '{{ symfony_folder }}'
-    - name: Execute doctrine migrations
-      become: false
-      tags: doctrine-migrate
-      ansible.builtin.command:
-        cmd: '{{ symfony_binary_path }} console doctrine:migrations:migrate --env={{ symfony_app_env }} --no-interaction'
-        chdir: '{{ symfony_folder }}'
+- name: Remove Symfony compiled env file
+  tags: dotenv-remove
+  ansible.builtin.file:
+    path: '{{ symfony_folder }}/.env.local.php'
+    state: absent
+- name: Clear Symfony cache
+  tags: clear-cache
+  ansible.builtin.file:
+    path: '{{ symfony_folder }}/var/cache/{{ symfony_app_env }}'
+    state: absent
+  no_log: true
+  ignore_errors: true
+- name: Regenerate Symfoy compiled env file
+  become: false
+  tags: dotenv-dump
+  ansible.builtin.command:
+    cmd: '{{ symfony_binary_path }} console dotenv:dump {{ symfony_app_env }} --env={{ symfony_app_env }}'
+    chdir: '{{ symfony_folder }}'
+- name: Clear Symfony Doctrine metadata cache
+  become: false
+  tags: doctrine-cache-clear-metadata
+  ansible.builtin.command:
+    cmd: '{{ symfony_binary_path }} console doctrine:cache:clear-metadata --env={{ symfony_app_env }} --no-interaction'
+    chdir: '{{ symfony_folder }}'
+- name: Clear Symfony Doctrine query cache
+  become: false
+  tags: doctrine-cache-clear-query
+  ansible.builtin.command:
+    cmd: '{{ symfony_binary_path }} console doctrine:cache:clear-query --env={{ symfony_app_env }} --no-interaction'
+    chdir: '{{ symfony_folder }}'
+- name: Execute Symfony Doctrine migrations
+  become: false
+  tags: doctrine-migrate
+  ansible.builtin.command:
+    cmd: '{{ symfony_binary_path }} console doctrine:migrations:migrate --env={{ symfony_app_env }} --no-interaction'
+    chdir: '{{ symfony_folder }}'
