@@ -40,11 +40,3 @@
       ansible.builtin.command:
         cmd: '{{ symfony_binary_path }} console doctrine:migrations:migrate --env={{ symfony_app_env }} --no-interaction'
         chdir: '{{ symfony_folder }}'
-  notify:
-    - name: Show compiled env file
-      tags: dotenv-show
-      block:
-        - command: 'cat {{ symfony_folder }}/.env.local.php'
-          register: compiled_dotenv_content
-        - debug:
-            var: compiled_dotenv_content.stdout
