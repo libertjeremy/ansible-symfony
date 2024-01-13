@@ -1,8 +1,6 @@
 ---
 
 - name: Reload all symfony
-  vars:
-    ansible_become: false
   block:
     - name: Remove compiled env file
       tags: dotenv-remove
