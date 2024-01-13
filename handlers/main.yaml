@@ -16,7 +16,7 @@
     state: absent
   no_log: true
   ignore_errors: true
-- name: Regenerate Symfoy compiled env file
+- name: Regenerate Symfony compiled env file
   vars:
     ansible_become: false
   become: false
