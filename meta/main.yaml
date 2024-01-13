@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: symfony
+  namespace: libertjeremy
+  description: Symfony tools
+  author: LibertJeremy
+  license: GPLv3
+  min_ansible_version: 2.0
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+        - wheezy
+  galaxy-tags:
+    - symfony
+    - php
+dependencies: []
