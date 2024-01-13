@@ -1,5 +1,9 @@
 ---
 
+- name: Clear Symfony cache
+  tags: clear-cache
+  ansible.builtin.command: 'echo "Clear Symfony cache"'
+  notify: Clear Symfony cache
 - name: Show compiled env file
   tags: dotenv-show
   block:
