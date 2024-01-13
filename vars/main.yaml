@@ -1,0 +1,4 @@
+---
+symfony_folder: /var/www
+symfony_binary_path: '{{ symfony_folder }}/bin/console'
+symfony_app_env: dev
