@@ -13,3 +13,14 @@
     - name: Display compiled env file content
       ansible.builtin.debug:
         var: compiled_dotenv_content.stdout
+- name: Show Debug Scheduler
+  tags: debug-scheduler
+  block:
+    - name: Retrieve Debug Scheduler content
+      ansible.builtin.command:
+        cmd: '{{ symfony_binary_path }} console debug:scheduler --env={{ symfony_app_env }}'
+        chdir: '{{ symfony_folder }}'
+      register: debug_scheduler_content
+    - name: Display Debug Scheduler content
+      ansible.builtin.debug:
+        var: debug_scheduler_content.stdout
